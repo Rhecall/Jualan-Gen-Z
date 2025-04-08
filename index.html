@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Oulike Snacks - Dimsum, Risoles, Cireng</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+    body {
+      background: linear-gradient(to bottom, #ffe4ec, #fff0f5);
+      color: #333;
+      padding: 20px;
+      animation: fadeInBody 1s ease-in;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Animasi masuk body */
+    @keyframes fadeInBody {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    header img.logo {
+      width: 100px;
+      height: auto;
+      margin-bottom: 10px;
+      animation: slideDown 1s ease;
+    }
+
+    @keyframes slideDown {
+      from { transform: translateY(-30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    header h1 {
+      font-size: 2.5em;
+      color: #d63384;
+    }
+    header p {
+      color: #6c3483;
+    }
+
+    /* Floating Emojis */
+    .floating-emojis::before {
+      content: '✨🍤🥟🌸🧀🌶️🥢';
+      position: absolute;
+      top: -20px;
+      left: 10%;
+      font-size: 2rem;
+      animation: floatEmojis 10s linear infinite;
+      opacity: 0.3;
+    }
+    @keyframes floatEmojis {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(100vh); }
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 30px;
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .product {
+      background: #ffe4ec;
+      border-radius: 16px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+      animation: slideUp 0.8s ease forwards;
+      opacity: 0;
+      position: relative;
+    }
+    .product:nth-child(1) { animation-delay: 0.2s; }
+    .product:nth-child(2) { animation-delay: 0.4s; }
+    .product:nth-child(3) { animation-delay: 0.6s; }
+
+    @keyframes slideUp {
+      from { transform: translateY(30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .product:hover {
+      transform: scale(1.02);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+
+    .product::after {
+      content: '🍽️';
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 1.5rem;
+      animation: wiggle 1.5s infinite;
+    }
+
+    @keyframes wiggle {
+      0%, 100% { transform: rotate(-5deg); }
+      50% { transform: rotate(5deg); }
+    }
+
+    .badge {
+      background-color: #ff80ab;
+      color: white;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 0.8em;
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .product img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .product-info {
+      padding: 20px;
+    }
+
+    .product-info h2 {
+      font-size: 1.5em;
+      margin-bottom: 10px;
+      color: #a8326d;
+    }
+
+    .product-info ul {
+      list-style: none;
+      font-size: 1em;
+      margin-bottom: 15px;
+    }
+
+    .product-info ul li {
+      margin-bottom: 6px;
+    }
+
+    .product-info a {
+      display: inline-block;
+      background: #f06292;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 1em;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .product-info a:hover {
+      background: #e91e63;
+      transform: scale(1.05);
+    }
+
+    .testi {
+      background-color: #fff0f8;
+      padding: 20px;
+      border-radius: 16px;
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    .testi h3 {
+      color: #d63384;
+      margin-bottom: 10px;
+    }
+
+    .testi p {
+      font-style: italic;
+      margin-bottom: 6px;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 0.9em;
+      color: #666;
+    }
+
+    footer a {
+      color: #d63384;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Sticker Mode */
+    .sticker-mode {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #ffaad4;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      font-size: 1.5em;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      animation: popIn 0.5s ease-in-out;
+    }
+
+    @keyframes popIn {
+      from { transform: scale(0); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .sticker-fly {
+      position: absolute;
+      font-size: 1.8em;
+      animation: flySticker 3s linear infinite;
+      opacity: 0.7;
+    }
+
+    @keyframes flySticker {
+      0% { transform: translateY(0) rotate(0deg); opacity: 0.7; }
+      100% { transform: translateY(-120vh) rotate(360deg); opacity: 0; }
+    }
+  </style>
+</head>
+<body class="floating-emojis">
+  <header>
+    <img class="logo" src="https://imgur.com/DfCQox6.jpeg" alt="Logo Oulike Snacks">
+    <h1>Oulike Snacks</h1>
+    <p>Dimsum, Risoles & Cireng Frozen Kekinian ✨</p>
+  </header>
+
+  <section class="products">
+    <div class="product">
+      <span class="badge">🔥 Best Seller</span>
+      <img src="https://imgur.com/s5OLGlX.jpeg" alt="Dimsum Ayam">
+      <div class="product-info">
+        <h2>Dimsum Ayam Original <br><small>"Lembut & gurih, kayak kamu~"</small></h2>
+        <ul>
+          <li>Mix 4 pcs - Rp 12K</li>
+          <li>Mix 20 pcs - Rp 55K</li>
+          <li>Mix 50 pcs - Rp 135K</li>
+          <li>Mix 100 pcs - Rp 270K</li>
+        </ul>
+        <a href="https://wa.me/6281234567890?text=Halo%2C%20saya%20mau%20pesan%20Dimsum" onmouseover="playHover()">Order via WhatsApp</a>
+      </div>
+    </div>
+
+    <div class="product">
+      <span class="badge">🌟 Favorit!</span>
+      <img src="https://imgur.com/4Q1TJHH.jpeg" alt="Risoles Bolognese">
+      <div class="product-info">
+        <h2>Risoles Bolognese <br><small>"Rasa western, harga masih anak kos!"</small></h2>
+        <ul>
+          <li>5 pcs - Rp 20K</li>
+          <li>10 pcs - Rp 40K</li>
+          <li>20 pcs - Rp 80K</li>
+          <li>50 pcs - Rp 200K</li>
+        </ul>
+        <a href="https://wa.me/6281234567890?text=Halo%2C%20saya%20mau%20pesan%20Risoles" onmouseover="playHover()">Order via WhatsApp</a>
+      </div>
+    </div>
+
+    <div class="product">
+      <span class="badge">🌶️ Pedas Mantap!</span>
+      <img src="https://imgur.com/4KoGM51.jpeg" alt="Cireng Ayam Suwir">
+      <div class="product-info">
+        <h2>Cireng Isi Ayam Suwir Pedas <br><small>"Pedasnya nyantol di hati 💘"</small></h2>
+        <ul>
+          <li>5 pcs - Rp 17K</li>
+          <li>10 pcs - Rp 35K</li>
+          <li>20 pcs - Rp 70K</li>
+          <li>50 pcs - Rp 175K</li>
+        </ul>
+        <a href="https://wa.me/6281234567890?text=Halo%2C%20saya%20mau%20pesan%20Cireng" onmouseover="playHover()">Order via WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="testi">
+    <h3>🍥 Kata Mereka</h3>
+    <p>"Risolesnya creamy banget, mayonesnya meleleh di hati!" – Nana, Bandung</p>
+    <p>"Cireng isi ayamnya... bikin nagih beneran!" – Dito, Depok</p>
+  </section>
+
+  <footer>
+    <p>DM juga bisa via Instagram: 
+      <a href="https://www.instagram.com/oulike.snacks?igsh=ZXNubzA5am14Ym42&utm_source=qr" target="_blank">@oulike.snacks</a>
+    </p>
+  </footer>
+
+  <!-- Tombol Sticker -->
+  <button class="sticker-mode" onclick="throwStickers()">🎉</button>
+
+  <!-- Script Sticker & Sound -->
+  <script>
+    function throwStickers() {
+      const stickers = ['🥟','🌶️','🧀','🍤','✨','💖','🍥'];
+      for (let i = 0; i < 15; i++) {
+        const s = document.createElement('div');
+        s.className = 'sticker-fly';
+        s.innerText = stickers[Math.floor(Math.random() * stickers.length)];
+        s.style.left = Math.random() * 100 + 'vw';
+        s.style.bottom = '0px';
+        document.body.appendChild(s);
+        setTimeout(() => s.remove(), 3000);
+      }
+    }
+
+    // Sound effect (fun & ringan)
+    const hoverSound = new Audio('https://www.myinstants.com/media/sounds/pop-up-off.mp3');
+    function playHover() {
+      hoverSound.play();
+    }
+  </script>
+  <section class="quiz">
+    <h3 style="text-align:center; color:#d63384; margin-top:40px;">✨ Snack Personality Quiz</h3>
+    <p style="text-align:center; margin-bottom:20px;">Kamu tuh lebih cocok jadi snack yang mana sih? Yuk, isi quiz singkat ini!</p>
+    <form style="max-width:500px; margin:0 auto; background:#fff0f8; padding:20px; border-radius:12px;">
+      <label>Pilih suasana favorit kamu:</label><br>
+      <input type="radio" name="vibe" value="hangat"> Hangat & santai<br>
+      <input type="radio" name="vibe" value="ramai"> Ramai & seru<br>
+      <input type="radio" name="vibe" value="sendu"> Sendu & chill<br><br>
+
+      <label>Kalo kamu jadi rasa, kamu tuh:</label><br>
+      <input type="radio" name="flavor" value="pedas"> Pedas menggoda<br>
+      <input type="radio" name="flavor" value="manis"> Manis bikin nagih<br>
+      <input type="radio" name="flavor" value="gurih"> Gurih penuh cinta<br><br>
+
+      <button type="button" onclick="showResult()" style="background:#f06292; color:white; padding:10px 20px; border:none; border-radius:8px;">Lihat Hasil</button>
+    </form>
+    <p id="result" style="text-align:center; margin-top:20px; font-weight:600;"></p>
+  </section>
+
+  <section class="horoscope">
+    <h3 style="text-align:center; color:#d63384; margin-top:50px;">♈ Snack Horoscope Kamu Hari Ini</h3>
+    <p style="text-align:center; margin-bottom:20px;">Pilih zodiak kamu dan cek snack vibes kamu hari ini!</p>
+    <select onchange="showHoroscope(this.value)" style="display:block; margin:0 auto; padding:10px; border-radius:8px;">
+      <option value="">-- Pilih Zodiak --</option>
+      <option value="aries">Aries</option>
+      <option value="taurus">Taurus</option>
+      <option value="gemini">Gemini</option>
+      <option value="cancer">Cancer</option>
+      <option value="leo">Leo</option>
+      <option value="virgo">Virgo</option>
+      <option value="libra">Libra</option>
+      <option value="scorpio">Scorpio</option>
+      <option value="sagittarius">Sagittarius</option>
+      <option value="capricorn">Capricorn</option>
+      <option value="aquarius">Aquarius</option>
+      <option value="pisces">Pisces</option>
+    </select>
+    <p id="horoscopeResult" style="text-align:center; margin-top:20px; font-weight:600;"></p>
+  </section>
+
+</body>
+</html>
